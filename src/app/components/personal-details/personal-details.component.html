@@ -1,0 +1,55 @@
+<p *ngIf="errorMessage.length !== 0" class="text-red-500">{{ errorMessage }}</p>
+
+<div *ngIf="(userLoginOn && !editMode) || !userLoginOn">
+  <p><b> Nombre: </b> {{ user?.firstname }} </p>
+  <p><b> Apellido: </b> {{ user?.lastname }}</p>
+  <p><b> País: </b> {{ user?.country }}</p>
+  <button *ngIf="userLoginOn && !editMode" (click)="editMode=true" class="px-4 py-2 text-white bg-gray-800 rounded">
+    <img src="https ://cdn.icon-icons.com/icons2/1572/PNG/96/3592815-compose-create-edit-edit-file-office-pencil-writing_107734.png"
+      width="8%" alt="editar" />Editar Datos Personales
+  </button>
+</div>
+
+<form *ngIf="userLoginOn && editMode" [formGroup]="registerForm" class="mt-4">
+  <div class="form-group row">
+    <label for="inputFirstName" class="col-sm-1 col-form-label">Nombre</label>
+    <div class="col-sm-11">
+      <input type="text" formControlName="firstname" class="p-2 border" id="inputFirstName">
+
+      <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="text-red-500">
+        <div *ngIf="firstname.errors?.['required']">
+          El Nombre es requerido.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="inputLasttName" class="col-sm-1 col-form-label">Apellido</label>
+    <div class="col-sm-11">
+      <input type="text" formControlName="lastname" class="p-2 border" id="inputLasttName">
+      <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="text-red-500">
+        <div *ngIf="lastname.errors?.['required']">
+          El Apellido es requerido.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pb-3 border-b form-group row">
+    <label for="inputCountry" class="col-sm-1 col-form-label">País</label>
+    <div class="col-sm-11">
+      <input type="text" formControlName="country" class="p-2 border" id="inputCountry">
+      <div *ngIf="country.invalid && (country.dirty || country.touched)" class="text-red-500">
+        <div *ngIf="country.errors?.['required']">
+          El País es requerido.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" (click)="savePersonalDetailsData()" class="px-4 py-2 mt-3 text-white bg-gray-800 rounded">
+    Guardar
+  </button>
+  <a class="px-4 py-2 mt-3 text-white bg-red-500" (click)="editMode=false">Cancelar</a>
+</form>
