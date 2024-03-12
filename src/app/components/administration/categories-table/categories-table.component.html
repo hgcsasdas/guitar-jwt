@@ -1,0 +1,31 @@
+<div class="overflow-x-auto">
+  <div class="w-full flex justify-center items-center">
+    <input
+      type="text"
+      placeholder="Buscar por nombre"
+      [(ngModel)]="searchTerm"
+      class="p-2 mb-4 border border-gray-300 rounded-md sm:w-1/5"
+    />
+
+  </div>
+
+  <table class="table table-zebra">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of getFilteredProducts()">
+        <th>{{ category.id }}</th>
+        <td>{{ category.name }}</td>
+        <td class="flex flex-col gap-2 sm:flex-row">
+          <button class="btn btn-primary" (click)="editCategory(category.id)">Editar</button>
+          <button class="btn btn-danger" (click)="deleteCategory(category.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

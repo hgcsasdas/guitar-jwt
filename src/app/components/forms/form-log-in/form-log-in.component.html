@@ -1,0 +1,57 @@
+<form class="w-full max-w-md p-6 bg-white">
+  <h2 class="text-2xl font-bold mb-6">Iniciar sesión</h2>
+
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+      Correo electrónico:
+    </label>
+    <input
+      class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="username"
+      type="email"
+      placeholder="Correo electrónico"
+      [formControl]="username"
+    />
+
+    <div
+      *ngIf="username.touched && username.errors"
+      class="text-red-500 text-xs mt-1"
+    >
+      {{ "Correo electrónico requerido y debe ser válido." }}
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+      Contraseña:
+    </label>
+    <input
+      class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="password"
+      type="password"
+      placeholder="Contraseña"
+      [formControl]="password"
+    />
+
+    <div
+      *ngIf="password.touched && password.errors"
+      class="text-red-500 text-xs mt-1"
+    >
+      {{ "Contraseña requerida." }}
+    </div>
+  </div>
+
+  <div class="w-full flex items-center justify-center">
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      type="button"
+      (click)="login()"
+    >
+      Iniciar sesión
+    </button>
+  </div>
+
+  <div *ngIf="loginError" class="text-red-500 text-sm mt-4">
+    {{ loginError }}
+  </div>
+</form>

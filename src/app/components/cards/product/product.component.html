@@ -1,0 +1,10 @@
+<div class="w-full overflow-hidden rounded shadow-lg bg-base-200">
+  <img *ngIf="product.image" [src]="convertBase64ToImageUrl(product.image)" alt="Product Image" class="object-cover w-full h-40">
+  <div class="px-6 py-4">
+    <div class="mb-2 text-xl font-bold">
+      {{ product.name }}
+      <p class="text-base text-gray-700 badge badge-primary">{{ product.price }} €</p>
+    </div>
+    <p class="text-base text-gray-700 truncate">{{ product.description }}</p>
+  </div>
+</div>

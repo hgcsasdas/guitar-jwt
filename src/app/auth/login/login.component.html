@@ -1,24 +1,29 @@
+<section class="bg-mytheme-neutral min-h-screen flex items-center justify-center">
+  <div class="max-w-md w-3/4 p-6 space-y-6 bg-white shadow-md rounded-md">
+    <app-form-log-in *ngIf="showLoginForm"></app-form-log-in>
 
-<form [formGroup]="loginForm">
-  <p class="text-danger">{{loginError}}</p>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Username</label>
-    <input formControlName="username" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      <div *ngIf="username.invalid && (username.dirty || username.touched)" class="text-danger">
-          <div *ngIf="username.errors?.['required']">
-              El username es requerido.
-          </div>
+    <app-form-register *ngIf="!showLoginForm"></app-form-register>
+
+    <div class="text-center">
+      <h2 class="text-2xl font-semibold text-mytheme-base-700">{{ showLoginForm ? '¡Bienvenido de vuelta!' : '¡Únete a nuestra comunidad!' }}</h2>
+      <p class="text-mytheme-base-500">{{ showLoginForm ? 'Ingresa tus datos para continuar' : 'Regístrate para acceder a todas las funciones' }}</p>
+
+      <p class="text-sm text-mytheme-base-100 mt-4">
+        {{ showLoginForm ? '¿No tienes una cuenta?' : '¿Ya tienes una cuenta?' }}
+        <a class="text-accent cursor-pointer" (click)="toggleForm()">{{ showLoginForm ? 'Regístrate aquí' : 'Inicia sesión aquí' }}</a>
+      </p>
+
+      <div class="flex justify-center mt-6 space-x-4">
+        <a href="#" class="text-4xl text-mytheme-base-500 hover:text-mytheme-accent">
+          <i class="fab fa-facebook-square"></i>
+        </a>
+        <a href="#" class="text-4xl text-mytheme-base-500 hover:text-mytheme-accent">
+          <i class="fab fa-twitter-square"></i>
+        </a>
+        <a href="#" class="text-4xl text-mytheme-base-500 hover:text-mytheme-accent">
+          <i class="fab fa-instagram-square"></i>
+        </a>
       </div>
+    </div>
   </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1">
-      <div *ngIf="password.invalid && (password.dirty || password.touched)"
-          class="text-danger">
-          <div *ngIf="password.errors?.['required']">
-              El Password es requerido.
-          </div>
-      </div>
-  </div>
-  <button type="submit" (click)="login()" class="btn btn-primary">Iniciar Sesión</button>
-</form>
+</section>

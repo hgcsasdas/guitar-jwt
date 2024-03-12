@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginRequest } from './loginRequest';
+import { LoginRequest } from './requests/loginRequest';
 import {
   Observable,
   throwError,
@@ -16,7 +16,6 @@ import { environment } from '../../../environments/environment';
 })
 export class LoginService {
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  //Lo que nos devuelve es un token
   currentUserData: BehaviorSubject<String> = new BehaviorSubject<String>('');
 
   constructor(private http: HttpClient) {

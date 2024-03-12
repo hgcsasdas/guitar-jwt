@@ -1,11 +1,8 @@
-<p *ngIf="!userLoginOn" class="alert alert-danger">Usuario NO autenticado</p>
-<p *ngIf="userLoginOn" class="alert alert-success">Usuario Autenticado</p>
-
-<div class="card">
-  <div class="card-header">Datos Personales</div>
-  <div class="m-0 card-body">
-
+<div class="rounded shadow-md card bg-base-200">
+  <div class="text-2xl font-semibold text-center text-gray-800">
+    Datos Personales
+  </div>
+  <div class="p-4 card-body sm:p-8">
     <app-personal-details></app-personal-details>
   </div>
 </div>
-

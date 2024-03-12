@@ -1,0 +1,58 @@
+<section class="flex flex-col items-center justify-center w-full gap-8">
+  <div class="text-sm breadcrumbs w-full p-2">
+    <ul>
+      <li><a routerLink="/">Inicio</a></li>
+      <li class="text-accent">Administración</li>
+    </ul>
+  </div>
+
+  <div class="flex flex-col gap-4 p-2 sm:flex-row">
+    <div
+      [class.active-button]="productsActive"
+      class="w-full rounded-lg shadow-xl cursor-pointer bg-base-300 sm:w-96"
+      (click)="switchActive('products')"
+    >
+      <div class="p-4">
+        <h2 class="mb-2 text-xl font-semibold">Administración de productos</h2>
+        <p>Aquí podrá administrar sus diferentes productos</p>
+        <div class="flex justify-center gap-4 mt-4">
+          <button class="btn btn-primary" (click)="switchActive('products')">
+            Administrar Productos
+          </button>
+          <button class="btn btn-primary" routerLink="/administracion/formulario-producto">
+            Crear Producto
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      [class.active-button]="categoryActive"
+      class="w-full rounded-lg shadow-xl cursor-pointer bg-base-300 sm:w-96"
+      (click)="switchActive('categories')"
+    >
+      <div class="p-4">
+        <h2 class="mb-2 text-xl font-semibold">Administración de categorías</h2>
+        <p>Aquí podrá administrar sus diferentes categorías</p>
+        <div class="flex justify-center gap-4 mt-4">
+          <button class="btn btn-primary" (click)="switchActive('categories')">
+            Administrar categorías
+          </button>
+          <button class="btn btn-primary" routerLink="/administracion/formulario-categoria">
+            Crear Categoría
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full">
+    <div *ngIf="productsActive">
+      <app-products-table></app-products-table>
+    </div>
+
+    <div *ngIf="categoryActive">
+      <app-categories-table></app-categories-table>
+    </div>
+  </div>
+</section>

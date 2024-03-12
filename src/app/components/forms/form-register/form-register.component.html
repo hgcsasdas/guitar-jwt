@@ -1,0 +1,77 @@
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="register()"
+  class="max-w-md mx-auto"
+>
+  <h2 class="text-2xl font-bold mb-6">Registro de usuario</h2>
+  <div *ngIf="successMessage" class="text-green-600">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="text-red-600">
+    {{ errorMessage }}
+  </div>
+  <div class="mb-4">
+    <label for="username" class="block text-gray-700 text-sm font-bold mb-2"
+      >Correo</label
+    >
+    <input
+      type="text"
+      id="username"
+      [formControl]="username"
+      class="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+    />
+  </div>
+  <div class="mb-4">
+    <label for="password" class="block text-gray-700 text-sm font-bold mb-2"
+      >Contraseña</label
+    >
+    <input
+      type="password"
+      id="password"
+      [formControl]="password"
+      class="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+    />
+  </div>
+  <div class="mb-4">
+    <label for="firstname" class="block text-gray-700 text-sm font-bold mb-2"
+      >Nombre</label
+    >
+    <input
+      type="text"
+      id="firstname"
+      [formControl]="firstname"
+      class="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+    />
+  </div>
+  <div class="mb-4">
+    <label for="lastname" class="block text-gray-700 text-sm font-bold mb-2"
+      >Apellido</label
+    >
+    <input
+      type="text"
+      id="lastname"
+      [formControl]="lastname"
+      class="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+    />
+  </div>
+  <div class="mb-4">
+    <label for="country" class="block text-gray-700 text-sm font-bold mb-2"
+      >País</label
+    >
+    <input
+      type="text"
+      id="country"
+      [formControl]="country"
+      class="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+    />
+  </div>
+  <div class="w-full flex items-center justify-center">
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      type="button"
+      (click)="register()"
+    >
+      Registrarse
+    </button>
+  </div>
+</form>

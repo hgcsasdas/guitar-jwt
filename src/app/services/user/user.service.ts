@@ -1,28 +1,54 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, retry, tap, throwError } from 'rxjs';
-import { User } from '../auth/user';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  map,
+  tap,
+  throwError,
+} from 'rxjs';
+import { User } from './user';
 import { UserRequestGUbU } from './requests/userRequestGUbU';
 import { environment } from '../../../environments/environment';
-import { LoginService } from '../auth/login.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  currentUserRol: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
+
   constructor(private http: HttpClient) {}
 
-  getUser(id: number): Observable<User> {
+  getUserByUsername(requestObject: UserRequestGUbU): Observable<any> {
     return this.http
-      .get<User>(environment.urlApi + 'user/' + id)
-      .pipe(catchError(this.handleError));
+      .post<any>(environment.urlApi + 'user/find-user', requestObject)
+      .pipe(
+        tap((userData) => {
+          sessionStorage.setItem('token', userData.token);
+        }),
+        map((userData) => userData.userDto),
+
+        catchError(this.handleError)
+      );
   }
 
-  getUserByUsername(requestObject: UserRequestGUbU): Observable<User> {
+  getUserRole(requestObject: UserRequestGUbU): Observable<boolean> {
     return this.http
-      .post<User>(environment.urlApi + 'user/find-user', requestObject)
-      .pipe(catchError(this.handleError));
+      .post<any>(environment.urlApi + 'user/getRole', requestObject)
+      .pipe(
+        tap((userData) => {
+          if (userData != null) {
+            this.currentUserRol.next(userData.rol === 'ROLE_ADMIN');
+          }
+        }),
+        map(() => this.currentUserRol.value),
+        catchError(this.handleError)
+      );
   }
+
   updateUser(userRequest: User): Observable<any> {
     let username = sessionStorage.getItem('username');
 
@@ -30,15 +56,15 @@ export class UserService {
       userRequest.username = username;
     }
 
-    return this.http.put<any>(environment.urlApi + 'user/update', userRequest).pipe(
-      tap((userData) => {
-        console.log(userData);
-        sessionStorage.setItem('token', userData.token);
+    return this.http
+      .put<any>(environment.urlApi + 'user/update', userRequest)
+      .pipe(
+        tap((userData) => {
+          sessionStorage.setItem('token', userData.token);
+        }),
 
-      }),
-
-      catchError(this.handleError)
-    );
+        catchError(this.handleError)
+      );
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -54,5 +80,9 @@ export class UserService {
     return throwError(
       () => new Error('Algo falló. Por favor intente nuevamente.')
     );
+  }
+
+  get userData(): Observable<boolean> {
+    return this.currentUserRol.asObservable();
   }
 }

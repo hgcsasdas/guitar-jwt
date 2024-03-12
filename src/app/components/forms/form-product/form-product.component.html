@@ -1,0 +1,140 @@
+<section>
+  <div class="text-sm breadcrumbs w-full p-2">
+    <ul>
+      <li><a routerLink="/">Inicio</a></li>
+      <li><a routerLink="/administracion">Administración</a></li>
+      <li class="text-accent">Crear Producto</li>
+    </ul>
+  </div>
+  <section
+    class="w-full flex items-center justify-center py-10 shadow-md rounded-md"
+  >
+    <article class="w-3/4 sm:w-1/3 bg-base-200 rounded-md p-8">
+      <h2 class="text-2xl font-bold mb-6 text-center">Administrar Producto</h2>
+      <div *ngIf="productError" class="text-red-500 text-sm mt-4">
+        {{ productError }}
+      </div>
+      <div *ngIf="successMessage" class="text-green-500 text-sm mt-4">
+        {{ successMessage }}
+      </div>
+
+      <form #productForm="ngForm" class="space-y-4 px-4">
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="productName"
+            >Nombre del producto:</label
+          >
+          <input
+            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:shadow-outline"
+            id="productName"
+            name="productName"
+            type="text"
+            placeholder="Nombre del Producto"
+            [(ngModel)]="product.name"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="productPrice"
+            >Precio:</label
+          >
+          <input
+            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:shadow-outline"
+            id="productPrice"
+            name="productPrice"
+            type="number"
+            placeholder="Precio del Producto"
+            [(ngModel)]="product.price"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="productImage"
+            >Imágen:</label
+          >
+          <input
+            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:shadow-outline"
+            id="productImage"
+            name="productImage"
+            type="file"
+            accept="image/*"
+            (change)="onImageChange($event)"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="productDescription"
+            >Descripción:</label
+          >
+          <textarea
+            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:shadow-outline"
+            id="productDescription"
+            name="productDescription"
+            rows="4"
+            placeholder="Descripción del Producto"
+            [(ngModel)]="product.description"
+            required
+          ></textarea>
+        </div>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="productQuantity"
+            >Cantidad:</label
+          >
+          <input
+            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:shadow-outline"
+            id="productQuantity"
+            name="productQuantity"
+            type="number"
+            placeholder="Cantidad Disponible"
+            [(ngModel)]="product.quantity"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="productCategory"
+            >Categoría:</label
+          >
+          <select
+            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:shadow-outline"
+            id="productCategory"
+            name="productCategory"
+            [(ngModel)]="product.category"
+            required
+          >
+            <option
+              *ngFor="let category of categories"
+              [value]="{ id: category.id, name: category.name }"
+            >
+              {{ category.name }}
+            </option>
+          </select>
+        </div>
+        <div class="w-full flex items-center justify-center">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+            (click)="submitProduct()"
+          >
+            Guardar Producto
+          </button>
+        </div>
+
+        <div *ngIf="productError" class="text-red-500 text-sm mt-4">
+          {{ productError }}
+        </div>
+      </form>
+    </article>
+  </section>
+</section>

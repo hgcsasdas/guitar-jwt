@@ -11,8 +11,6 @@ export class DashboardComponent implements OnInit {
   constructor(private loginService:LoginService) { }
 
   ngOnInit(): void {
-
-
     this.loginService.currentUserLoginOn.subscribe({
       next:(userLoginOn) => {
         this.userLoginOn=userLoginOn;

@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
 import { LoginService } from '../../services/auth/login.service';
-import { User } from '../../services/auth/user';
+import { User } from '../../services/user/user';
 import { UserService } from '../../services/user/user.service';
 import { UserRequestGUbU } from '../../services/user/requests/userRequestGUbU';
 
@@ -45,6 +43,7 @@ export class PersonalDetailsComponent {
         usernameSearching: username
       };
 
+
       this.userService.getUserByUsername(userRequest).subscribe({
         next: (userData) => {
           this.user = userData;
@@ -57,10 +56,9 @@ export class PersonalDetailsComponent {
         },
         error: (errorData) => {
           this.errorMessage = errorData;
+
         },
-        complete: () => {
-          console.info('User Data ok');
-        },
+
       });
     }
 
